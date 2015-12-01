@@ -1,0 +1,157 @@
+MySQL Error: 
+ Error code:  Query: SELECT `id`, `key`, `value`, `creation_date` FROM parameters WHERE `key` = 'modules'
+MySQL Error: Access denied for user 'www-data'@'localhost' (using password: NO)
+ Error code: 1045 Query: INSERT INTO users (`first_name`,`last_name`,`username`,`pwd`,`status`,`role_id`,`creation_date`) VALUES);
+MySQL Error: 
+ Error code:  Query: SELECT * FROM roles ORDER BY role_name ASC
+MySQL Error: 
+ Error code:  Query: SELECT meta_key, meta_value FROM users WHERE meta_key = '_observations' AND 2 = 'user_id'
+MySQL Error: 
+ Error code:  Query: UPDATE parameters SET value = '[\"mod_modules\",\"mod_content\"]' WHERE key = 'modules'
+MySQL Error: 
+ Error code:  Query: UPDATE parameters SET value = '[\"mod_modules\",\"mod_content\"]' WHERE key = 'modules'
+MySQL Error: 
+ Error code:  Query: CREATE TABLE IF NOT EXISTS content(
+	content_id				bigint not null auto_increment primary key,
+	parent_id				bigint not null default 0,
+	title					varchar(512),
+	content					text,
+	slug					varchar(256),
+	author_id				bigint,
+	status					varchar(64),
+	order					integer default 0,
+	access_level			text,
+	last_modification_date	datetime
+	creation_date			datetime
+)
+MySQL Error: 
+ Error code:  Query: CREATE TABLE IF NOT EXISTS content(
+	content_id				bigint not null auto_increment primary key,
+	parent_id				bigint not null default 0,
+	title					varchar(512),
+	content					text,
+	slug					varchar(256),
+	author_id				bigint,
+	status					varchar(64),
+	show_order				integer default 0,
+	access_level			text,
+	last_modification_date	datetime
+	creation_date			datetime
+)
+MySQL Error: 
+ Error code:  Query: 
+MySQL Error: 
+ Error code:  Query: SELECT level_id FROM user_levels WHERE leve_id = 1 LIMIT 1
+MySQL Error: 
+ Error code:  Query: UPDATE user_meta um SET um.meta_value = '0' WHERE um.meta_key = '_level' AND um.user_id IN(SELECT u.user_id FROM users u, user_meta m WHERE u.user_id = m.user_id AND m.meta_key = '_level' AND m.meta_value = '1')
+MySQL Error: 
+ Error code:  Query: UPDATE user_meta SET meta_value = '0' WHERE meta_key = '_level' AND user_id IN(SELECT u.user_id FROM users u, user_meta m WHERE u.user_id = m.user_id AND m.meta_key = '_level' AND m.meta_value = '1')
+MySQL Error: 
+ Error code:  Query: UPDATE user_meta SET meta_value = '0' WHERE meta_key = '_level' AND user_id IN(SELECT u.user_id FROM users u, user_meta m WHERE u.user_id = m.user_id AND m.meta_key = '_level' AND m.meta_value = '1')
+MySQL Error: 
+ Error code:  Query: UPDATE user_meta SET meta_value = '0' WHERE meta_key = '_level' AND user_id IN()
+MySQL Error: 
+ Error code:  Query: SELECT u.*, r.role_name FROM users u, user_role r WHERE username <> 'root' AND u.role_id = r.role_id ORDER BY creation_date DESC
+MySQL Error: 
+ Error code:  Query: SELECT p.* FROM role2permission r2p, permissions p WHERE r2p.role_id =  AND r2p.permission_id = p.permission_id
+MySQL Error: 
+ Error code:  Query: SELECT p.* FROM role2permission r2p, permissions p WHERE r2p.role_id =  AND r2p.permission_id = p.permission_id
+MySQL Error: 
+ Error code:  Query: UPDATE section SET `0` = 'access_level' WHERE `section_id` = '3'
+MySQL Error: 
+ Error code:  Query: SELECT COUNT(u.user_id) AS total FROM users u, um.user_meta WHERE u.user_id = um.user_id AND um.meta_key = '_owner_id' AND um.meta_value = '3'
+MySQL Error: 
+ Error code:  Query: SELECT COUNT(u.user_id) AS total FROM users u, um.user_meta WHERE u.user_id = um.user_id AND um.meta_key = '_owner_id' AND um.meta_value = '3'
+MySQL Error: 
+ Error code:  Query: SELECT u.*,r.role_name FROM  WHERE username <> 'root' AND u.role_id = r.role_id AND u.user_id = um.user_id AND um.meta_key = "_owner_id" AND um.meta_value = "3" ORDER BY creation_date DESC
+MySQL Error: 
+ Error code:  Query: CREATE TABLE IF NOT EXISTS user_roles ( 
+    role_id                	INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    role_name              	varchar(128),
+    role_description       	TEXT,
+    key						varchar(128),
+    last_modification_date 	datetime,
+    creation_date          	datetime 
+)
+MySQL Error: 
+ Error code:  Query: SELECT * FROM user_role WHERE role_key = "admin" LIMIT 1
+MySQL Error: 
+ Error code:  Query: INSERT INTO permissions (`permission`,`label`,`0`) VALUES('smn_receive_messages','Recivir Mensajes (SMN)','smn');
+MySQL Error: 
+ Error code:  Query: INSERT INTO section2content(section_id,content_id) VALUES
+MySQL Error: 
+ Error code:  Query: SELECT * FROM users WHERE username LIKE '%cl%' AND username <> 'root' AND username <> root ORDER BY username ASC
+MySQL Error: 
+ Error code:  Query: SELECT c.* FROM content c,content_meta ced WHERE 1 = 1 AND c.content_id = ced.content_id AND ced.meta_key = '_end_date' AND c.status = 'publish' AND DATE(ced.meta_value) >= DATE(NOW()) AND c.publish_date <= NOW() LIMIT 0, 20 ORDER BY c.creation_date DESC
+MySQL Error: 
+ Error code:  Query: SELECT u.*, (
+								SELECT count(us.id) 
+								FROM user_stats us 
+								WHERE us.user_id = u.user_id
+								AND type = 'authenticated'
+								) AS auths
+					FROM users u 
+					'
+MySQL Error: 
+ Error code:  Query: SELECT u.*, (
+								SELECT count(us.id) 
+								FROM user_stats us 
+								WHERE us.user_id = u.user_id
+								AND type = 'authenticated'
+								) AS u.auths
+					FROM users u 
+					WHERE username <> 'root' 
+					ORDER BY u.username desc
+MySQL Error: 
+ Error code:  Query: SELECT u.*, (
+								SELECT count(us.id) 
+								FROM user_stats us 
+								WHERE us.user_id = u.user_id
+								AND type = 'authenticated'
+								) AS auths
+					FROM users u 
+					WHERE username <> 'root' 
+					ORDER BY u.auths asc
+MySQL Error: 
+ Error code:  Query: INSERT INTO role2permission(role_id,permission_id) VALUES
+MySQL Error: 
+ Error code:  Query: SELECT u.*,r.role_name FROM users u LEFT JOIN user_roles r ON u.role_id = r.role_id WHERE username <> 'root' ORDER BY desc desc
+MySQL Error: 
+ Error code:  Query: SELECT u.*,r.role_name FROM users u LEFT JOIN user_roles r ON u.role_id = r.role_id WHERE username <> 'root' ORDER BY desc desc
+MySQL Error: 
+ Error code:  Query: 
+MySQL Error: 
+ Error code:  Query: 
+MySQL Error: 
+ Error code:  Query: SELECT COUNT(*) AS total_rows FROM c.content
+MySQL Error: 
+ Error code:  Query: INSERT INTO messages (`sender_id`,`subject`,`message`,`status`,`type`,`scheduled`,`creation_date`,`user_id`,`data`) VALUES(1,'Email programado para usuarios #1','<p>Hola</p>\r\n<p>&nbsp;</p>\r\n<p>ASdsa</p>\r\n<p>&nbsp;</p>\r\n<p>Saludos.</p>','unread','role',1,'2015-08-31 22:18:19','','{\"role_ids\":[\"2\"]}');
+MySQL Error: 
+ Error code:  Query: SELECT * FROM forms WHERE status = 'enabled' ORDER BY creation_date desc LIMIT 0, 25
+MySQL Error: 
+ Error code:  Query: SELECT * FROM users WHERE 1 = 1 role_id IN(1)
+MySQL Error: 
+ Error code:  Query: SELECT COUNT(*) AS total_rows FROM messages mWHERE sender_id = 1 AND scheduled <> 1
+MySQL Error: 
+ Error code:  Query: LIMIT 0, 25
+MySQL Error: 
+ Error code:  Query: LIMIT 0, 25
+MySQL Error: 
+ Error code:  Query: SELECT m.*, (SELECT from.email AS from_email, CONCAT(from.first_name, ' ', from.last_name) AS from_fullname FROM users fromWHERE m.user_id = to.user_id), (SELECT to.email AS to_email, CONCAT(to.first_name, ' ', to.last_name) AS to_fullname FROM users to WHERE m.user_id = to.user_id) FROM messages m WHERE sender_id = 1 AND scheduled <> 1 ORDER BY creation_date descLIMIT 0, 25
+MySQL Error: 
+ Error code:  Query: SELECT m.*, (SELECT uto.emailFROM users uto WHERE m.user_id = uto.user_id) AS to_email, (SELECT CONCAT(uname.first_name, ' ', uname.last_name)FROM users unameWHERE m.user_id = uname.user_id) as to_fullname FROM messages m WHERE sender_id = 1 AND scheduled <> 1 ORDER BY creation_date descLIMIT 0, 25
+MySQL Error: 
+ Error code:  Query: SELECT m.*, (SELECT uto.emailFROM users uto WHERE m.user_id = uto.user_id) AS to_email, (SELECT CONCAT(uname.first_name, ' ', uname.last_name)FROM users unameWHERE m.user_id = uname.user_id) as to_fullname FROM messages m WHERE sender_id = 1 AND scheduled <> 1 ORDER BY creation_date desc LIMIT 0, 25
+MySQL Error: 
+ Error code:  Query: SELECT COUNT(user_id) AS total_rows FROM users u, user_meta um WHERE 1 = 1 AND u.user_id = um.user_id AND um.meta_key = '_logged_in' AND um.meta_value = 'yes'
+MySQL Error: 
+ Error code:  Query: SELECT u.user_id, u.first_name,u.last_name,u.username, us.type, us.creation_date
+					from users u, user_stats us
+					WHERE 1 = 1
+					AND u.user_id = us.user_id ORDER BY creation_date desc LIMIT , 50
+MySQL Error: 
+ Error code:  Query: SELECT COUNT(u.user_id) as total_rows
+					from users u, user_stats us
+					WHERE 1 = 1
+					AND u.user_id = us.user_id
+					AND us.type = 'authenticated' AND (DATE(creation_date) >= 2010-12-10 AND DATE(creation_date) <= 2015-12-10)

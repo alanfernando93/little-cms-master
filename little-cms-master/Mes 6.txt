@@ -1,0 +1,61 @@
+Mes6:
+
+1.- graficos en lugar de botones:
+	-En Articulos y Secciones, justo despues del Titulo, tiene que haber un Checkbox que se llame "Usar Imagen en lugar de Boton de texto".
+	Justo debajo, y antes de banner en los articulos o descripcion en las secciones, se vera esta opcion:
+	Subir Imagen para Boton: (Tamaño recomendado: 200x100 / 150x80)
+	(Boton de "Subir Imagen")
+
+	Si el Checkbox esta marcado, en la pantalla del Usuario cuando tenga que ver el boton de ese Articulo o Seccion, vera en su lugar la imagen que
+	previamente se ha subido
+***acuerdate de definir la ayuda contextual para esta nueva opcion (en adelante cualquier nuevo añadido, tiene que tener su ayuda contextual)
+
+2.- optimizacion del uso de recursos:
+	1- cuando se borra un banner de un articulo, hay que borrar fisicamente el archivo
+	2- cuando se sube un nuevo archivo de banner para un articulo, el cms borrara el anterior archivo grafico
+	que se estaba usando en el articulo.
+	Esto para que se borren archivos no usados o que se dejan de usar
+	3-lo anterior tambien debes de hacerlo en el apartado de configuracion-diseño-logo  y configuracion-diseño-fondo de pantalla y tambien en la
+	opcion anterior de Graficos en lugar de botones
+		*** la idea es que no existan archivos en que no se esten usando para evitar ocupar espacio de hosting para nada
+
+3.- que se pueda ordenar de alguna manera el orden de aparicion de los Articulos y Secciones en el Frontend (quizas incorporando un boton de subir-
+	bajar en el listado de articulos y secciones que de prioridad (arriba-abajo) a los articulos o secciones)
+
+4.- creacion y gestion de la cola de envios de emails, esto es importante, hay que crear una cola de envio de los mensajes de email,
+	porque me han notificado en el hosting que tienen un limite de envios por hora de solo 100 emails y ese parametro hay que poder definirlo en una
+	nueva opcion dentro de Configuracion SMTP-Mensajes ("Limite por hora") para que el cms no envie mas de esa cantidad por hora y los que no pueda
+	enviar los ponga como pendientes para la siguiente hora. Para hacer pruebas pondre una cola de 1 o 2 mensajes para ver si al crear 3, se envian 2
+	primero y el tercero a la siguiente hora
+
+5.- creacion de un script externo y no integrado dentro del CMS para copiar. Este script es para añadir como trabajo CRON en el hosting. Ese script
+	estara en el directorio del CMS pero no integrado (es independiente). Los trabajos que debe de realizar este script son:
+	1.- creacion de un directorio llamado "bck"
+	2.- dentro de ese directorio, tiene que volcar toda la base de datos a un fichero de recuperacion SQL
+	3.- copiar todos los ficheros, directorios y subdirectorios (es decir todo) del cms a un fichero comprimido ZIP tambien dentro de ese directorio
+		bck
+	4.- comprimir en zip todo el directorio BCK con un nombre que yo pueda cambiar (me tienes que indicar en que linea de codigo del script puedo
+		cambiarlo). Por defecto, este nombre sera: cmscopy.zip
+	5.- subir ese archivo (cmscopy) a un bucket (directorio) de amazon s3 sobreescribiendo el anterior que ya existia
+	6.- borrar el directorio bck y el archivo cmscopy (una vez terminado de subir claro)
+
+	Para esta parte, he localizado la siguiente informacion:
+	http://pabloaraya.org/2012/01/carga-de-archivos-en-amazon-s3-con-php/
+	http://www.9lessons.info/2012/08/upload-files-to-amazon-s3-php.html
+
+6.- Añadir la funcion de Doble Optin. Cuando esa funcion esta habilitada, cuando un Usuario teclee su usuario/contraseña/captcha correctamente,
+	vera una segunda pantalla que le pedira el "Codigo de validacion" (justo debajo tienes que poner un texto aclaratorio "Revisa tu email para ver el
+	Codigo de Validacion")
+
+-En Configuracion-General, añadir un CheckBox que se llame "Habilitar Login con Doble Optin". Cuando ese CheckBox esta habilitado, el CMS generara un
+codigo aleatorio de 3 cifras y lo enviara por email al email del usuario que esta intentando hacer login. El contenido del email sera:
+Titulo/Asunto: "Codigo de Validacion: (Nombre del sitio)"
+Mensaje:
+Hola (nombre del usuario que esta intentando hacer login)
+Tu codigo de Validacion es: (codigo de validacion)
+Regresa a la ventana de Login, introduce el Codigo, y haz Click en "Entrar a mi cuenta"
+
+-si el usuario introduce un codigo incorrecto, el proceso empezara desde cero teniendo que volver a hacer login desde el principio
+	(usuario/contraseña/captcha)
+
+-el codigo de validacion enviado, tendra una caducidad de 30 minutos
